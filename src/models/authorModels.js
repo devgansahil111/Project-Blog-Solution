@@ -3,28 +3,41 @@ const mongoose = require("mongoose");
 const authorSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        required: true
+        required: "First name is required",
+        trim: true
     },
     lastName: {
         type: String,
-        required: true
+        required: "Last name is required",
+        trim: true
     },
     title: {
         type: String,
-        required: true,
+        required: "Title is required",
         enum: ["Mr", "Mrs", "Miss"]
     },
     email: {
         type: String,
-        required: true,
-        match: /.+\@.+\..+/,
-        unique: true
+        required: "Email address is required",
+        unique: true,
+        validate: {
+            validator: function (email) 
+            {
+             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+              {
+                return (true)
+              }
+                alert("You have entered an invalid email address!")
+                return (false)
+            }
+        }
     },
     password: {
         type: String,
-        required: true
+        required: "Password is required",
+        trim: true
     }
-}, {timestamps: true});
+}, { timestamps: true });
 
 
 

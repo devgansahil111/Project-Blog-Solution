@@ -6,23 +6,32 @@ const moment = require("moment");
 const blogSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: "Title is required",
+        trim: true
     },
     body: {
         type: String,
-        required: true
+        required: "Body is required",
+        trim: true
     },
     authorId: {
         type: ObjectId,
-        required: true,
+        required: "Blog Author is required",
         ref: "Author"
     },
-    tags: [String],
+    tags: [{
+        type: String,
+        trim: true
+    }],
     category: {
         type: String,
-        required: true
+        required: "Category is required",
+        trim: true
     },
-    subCategory: [String],
+    subCategory: [{
+        type: String,
+        trim: true
+    }],
     isDeleted: {
         type: Boolean,
         default: false
@@ -39,7 +48,7 @@ const blogSchema = new mongoose.Schema({
         type: Date,
         default: null
     }
-}, {timestamps: true});
+}, { timestamps: true });
 
 
 module.exports = mongoose.model("Blog", blogSchema);

@@ -15,6 +15,8 @@ const middleware = require("../middleware/auth");
 
 router.post("/createAuthor", authorController.createAuthor);
 
+router.post("/login", authorController.loginAuthor);
+
 router.post("/createBlog/:authorId", middleware.auth, middleware.authorize, blogController.createBlog);
 
 router.get("/blogs/:authorId", middleware.auth, middleware.authorize, blogController.getBlogs);
@@ -25,7 +27,6 @@ router.delete("/blogs/:blogId/:authorId", middleware.auth, middleware.authorize,
 
 router.delete("/delete/blogs/:authorId", middleware.auth, middleware.authorize, blogController.deleteByQueryParam);
 
-router.post("/login", authorController.loginAuthor);
 
 
 
